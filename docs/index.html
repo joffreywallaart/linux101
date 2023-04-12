@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Linux commandline 101</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/night.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+
+		<div class="reveal">
+            
+			<div class="slides">
+				<section>
+                    <h2>Linux command line basics</h2>
+                    <p><small>Joffrey Wallaart</small></p>
+                    <h4>April 2023</h4>
+                </section>
+
+                <section>
+                    <h3>Course goals</h3>
+                    Using the BASH command line, you can:
+                    <ul>
+                        <li class="fragment">Work with files and make minor edits</li>
+                        <li class="fragment">Transfer your files to other systems</li>
+                        <li class="fragment">Create and run scripts</li>
+                    </ul>
+                </section>
+
+				<section>
+                   <h3>Course contents</h3>
+                   <ol>
+                       <li>Linux</li>
+                       <li>Folders and files</li>
+                       <li>Editing files</li>
+                       <li>Redirecting output</li>
+                       <li>Installing local packages</li>
+                       <li>Permissions</li>
+                       <li>Remote Access</li>
+                       <li>Scripting</li>
+                       <li>Run your stuff on DelftBlue</li>
+                   </ol> 
+                </section>
+
+                <section data-background="assets/ritchie_thompson.jpg">
+                    <img src="assets/ritchie_thompson.jpg" alt="Dennis Ritchie and Ken Thompson" style="height: 400px; margin: 0 auto 4rem auto; background: transparent;">
+                    <h4>Dennis Ritchie and Ken Thompson created UNIX in 1969</h4>
+                </section>
+
+                <section>
+                    <img src="assets/vt100.jpg" alt="digital vt100 terminal" style="height: 400px; margin: 0 auto 4rem auto; background: transparent;">
+                    <h4>Digital vt100, 1978</h4>
+                </section>
+
+                <section data-background="#e6b400">
+                    <img src="assets/tux.svg" alt="digital vt100 terminal" style="height: 400px; margin: 0 auto 4rem auto; background: transparent;">
+                    <h4>Linux released in 1991</h4>
+                </section>
+
+                <section>
+                    <h1>Good News!</h1>
+                    <h3 class="fragment fade-up">You're already using Linux</h3>
+                </section>
+
+                <section data-transition="zoom-out">
+                    <h3>What is running Linux?</h3>
+                    <img src="assets/supercomputer.jpg" alt="DelfBlue" style="height: 400px; margin: 0 auto 4rem auto; background: transparent;">
+                    <h4>Supercomputers</h4>
+                </section>
+
+                <section data-transition="zoom-in" data-background="assets/socialmedia.png">
+                </section>
+
+                <section>
+                    <h3>What is running Linux?</h3>
+						<img src="assets/applemicrosoft.jpg" alt="Apple and Microsoft" style="height: 400px; margin: 0 auto 4rem auto; background: transparent;">
+                        <h4>Apple and Micro$oft</h4>
+                </section>
+
+                <section>
+                    <h3>What is running Linux?</h3>
+						<img src="assets/nyse.jpg" alt="New York Stock Exchange" style="height: 400px; margin: 0 auto 4rem auto; background: transparent;">
+                        <h4>New York Stock Exchange</h4>
+                        <!-- https://www.pcworld.com/article/481872/how_linux_mastered_wall_street.html -->
+                </section>
+
+                <section>
+                    <h3>What is running Linux?</h3>
+						<img src="assets/shinkansen.jpg" alt="Shinkansen bullet train" style="height: 400px; margin: 0 auto 4rem auto; background: transparent;">
+                        <h4>Shinkansen bullet train</h4>
+                </section>
+
+                <section>
+                    <h3>What is running Linux?</h3>
+                    <img src="assets/smarttv.jpg" alt="Sharp TV running android" style="height: 400px; margin: 0 auto 4rem auto; background: transparent;">
+                    <h4>Smart TVs</h4>
+                </section>
+
+                <section>
+                    <h3>What is running Linux?</h3>
+						<img src="assets/androidphones.jpg" alt="Android smartphones" style="height: 400px; margin: 0 auto 4rem auto; background: transparent;">
+                        <h4>Android smartphones</h4>
+                        <p class="fragment">est. 3.3 bn users</p>
+                </section>
+
+                <section>
+                    <h3>What should be running Linux?</h3>
+                </section>
+
+                <section data-background="assets/cat.gif" data-background-transition="zoom">
+                    <h2>Your computer!</h2>
+                </section>
+
+                <section>
+                    <h3>Housekeeping</h3>
+                    <p class="fragment">Folder == Directory</p>
+                    <p class="fragment">CLI == Terminal == Console == Shell == Prompt</p>
+                </section>
+
+                <section>
+                    <h3>The command prompt</h3>
+                    <img src="assets/cl1.png" alt="the command prompt" style="height: 200px; margin: 0 auto 4rem auto; background: transparent;">
+                    <p>
+                    <span class="fragment fade-in-then-semi-out">username</span>
+                    <span class="fragment fade-in-then-semi-out">@hostname </span>
+                    <span class="fragment fade-in-then-semi-out">location </span>
+                    <span class="fragment fade-in-then-semi-out">$ </span>
+                    <span class="fragment fade-in-then-semi-out">cursor</span>
+                    </p>
+                </section>
+
+                <section>
+                    <h3>Your first command</h3>
+                    <pre><code class="bash" data-trim>
+                    $ pwd
+                    </code></pre>
+                    <h4>"Present working directory"</h4>
+                    <p>This command shows your current location in the filesystem.</p>
+                </section>
+
+                <section>
+                    <img src="assets/w10file_explorer.jpg" alt="File Explorer" style="height: 500px; margin: 0 auto 4rem auto; background: transparent;">
+                </section>
+
+                <section>
+                    <h3>Basic navigation</h3>
+                    <p>The <strong>list</strong> command shows the contents of the current directory
+                    <pre><code class="bash" data-trim>
+                    $ ls
+                    </code></pre>
+                    <div class="fragment">
+                        <p>To move into a directory use <strong>Change Directory</strong></p>
+                        <pre><code class="bash" data-trim>
+                        $ cd Documents
+                        </code></pre>
+                        <small><p>Pro tip: Use the <strong>[tab]</strong> key for autocompletion.</p></small>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Filesystem shortcuts</h3>
+                    <small>
+                    <table>
+                        <tr><td>~<br>(or $HOME)</td><td>Your home directory</td></tr>                        
+                        <tr><td>/</td><td>The root directory</td></tr>
+                        <tr><td>.</td><td>The current directory</td></tr>
+                        <tr><td>..</td><td>One directory up</td></tr>
+                    </table>
+                    </small>
+                    <div class="fragment">
+                    <p>Exercise:</p>
+                    <small>
+                    <ul>
+                        <li>Try to navigate the filesystem using <strong>cd</strong> and <strong>ls</strong>.</li>
+                        <li>Don't forget <strong>[tab]</strong> for autocompletion.</li>
+                        <li>Try to find a file named <strong>the_chaos.txt</strong>.</li>
+                        <li>Try to figure out what <strong>'cd -'</strong> does.</li>
+                    </ul>
+                    </small>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Options</h3>
+                    <p>The list command, but with an <strong>option</strong> to make it behave differently</p>
+                    <pre><code class="bash" data-trim>
+                    $ ls -l
+                    </code></pre>
+                    <div class="fragment">
+                        <small>
+                        <p>Options can sometimes be written in full. This is particularly useful for scripts</p>
+                        </small>
+                        <pre><code class="bash" data-trim>
+                        $ ls -l --human-readable
+                        </code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Arguments</h3>
+                    <p>You can also pass an <strong>argument</strong> to commands</p>
+                    <small><p>This shows the contents of the 'Documents' folder:</p></small>
+                    <pre><code class="Bash" data-trim>
+                    $ ls Documents
+                    </code></pre>
+                    <div class="fragment">
+                        <small><p>You've been using arguments before:</p></small>
+                        <pre><code class="Bash" data-trim>
+                        $ cd Documents
+                        </code></pre>
+                    </div>
+                    <div class="fragment">
+                        <small><p>Sometimes an option can also take an argument:</p></small>
+                        <pre><code class="Bash" data-trim>
+                        $ ls -l --time-style=long-iso
+                        </code></pre>
+                        <small><p>Where 'long-iso' is the <strong>argument</strong> for the <strong>option</strong> --time-style.<p></small>
+                    </div> 
+                </section>
+
+                <section>
+                    <h3>Getting Help</h3>
+                    <p>Almost all programs have a <strong>help</strong> option that will show you 
+                    the proper syntax and most common options.</p>
+                    <pre><code class="bash" data-trim>
+                    $ ls --help
+                    </code></pre>
+                    <div class="fragment">
+                        <small><p>for more in-depth information pull up the <strong>manual</strong>:</p></small>
+                        <pre><code class="Bash" data-trim>
+                        $ man ls
+                        </code></pre>
+                    </div> 
+                    <div class="fragment">
+                        <p>Exercise:</p>
+                        <small>
+                        <ul>
+                            <li>Use the help option to construct the command to list <strong>all</strong> files in the <strong>home</strong> directory in <strong>reverse</strong> order, using the <strong>long</strong> list format.</li>
+                        </ul>
+                        </small>
+                    </div>
+                </section>
+
+                <section>
+                    <div>
+                        <pre><code class="Bash" data-trim>
+                        $ ls -a -r -l /home/username/
+                        </code></pre>
+                    </div> 
+                    <div class="fragment">
+                        <pre><code class="Bash" data-trim>
+                        $ ls --all --reverse -l $HOME
+                        </code></pre>
+                    </div> 
+                    <div class="fragment">
+                        <pre><code class="Bash" data-trim>
+                        $ ls -arl ~
+                        </code></pre>
+                    </div> 
+                </section>
+
+                <section>
+                    <h3>Hidden files, or dotfiles</h3>
+                    <p>Files and folders that start with a dot are hidden.</p> 
+                    <small class="fragment"><p>These contain settings or user specific (local) programs and libraries. Examples are .bashrc, .profile and the .config and .local subfolders. 
+                    These will become very important when you want to customize your experience. For now, they are better left alone.</p>
+                    <p class="fragment">Git also uses a .git subfolder in your project root to do its magic. Did you know that git was created to keep track of development on the Linux kernel?</p></small>
+                </section>
+
+                <section>
+                    <h3>Exploring file contents</h3>
+                    <small>
+                    <table>
+                        <tr><td>cat</td><td>Simply print file contents to the terminal <br>Good for scripts or short files</td></tr>
+                        <tr class="fragment"><td>less</td><td>More options including search <br>By default, man uses less to output text</td></tr>
+                    </table></small>
+                    <div class="fragment">
+                        <pre><code class="Bash" data-trim>
+                        $ man ${filename}
+                        $ less ${filename}
+                        </code></pre>
+                    </div>
+                    <div class="fragment">
+                        <p>Exercise:</p>
+                        <small>
+                        <ul>
+                            <li>Use less to open the_chaos.txt. Use search [/] to find 'croquet'</li>
+                            <li>try searching for 'and' and press [enter]</li>
+                            <li>use [n] and [n]. what does this do?</li>
+                        </ul>
+                        </small>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>file operations</h3>
+                    <small><table>
+
+                            <tr><td>cp ${source} ${target}</td><td>copy</td></tr>
+                            <tr class="fragment"><td>mv ${source} ${target}</td><td>move or rename</td></tr>
+                            <tr class="fragment"><td>mkdir ${directory}</td><td>make a directory</td></tr>
+                            <tr class="fragment"><td>rm ${filename}</td><td>remove a file</td></tr>
+                            <tr class="fragment"><td>rm -r ${directory}</td><td>remove a directory <br>'-r' for recursive</td></tr>
+                            
+                    </table>
+                    <p class="fragment">the last command will ask for confirmation for deletion of every file inside the directory. this can be remedied by using <strong>'rm -rf'</strong>. be careful though: there is no trashbin to restore deleted files.</p>
+                    </small>
+                    <div class="fragment">
+                    <p>exercise</p>
+                    <small><ul>
+                        <li>play around with copying and deleting files in the ~/music folder</li>
+                        <li>rename all files with spaces in the filename</li>
+                        <li>create a <strong>classical_music</strong> subfolder and copy some files to it</li>
+                        <li>then delete the folder</li>
+                        <li>finally, get rid of the whole music folder with <strong>rm -rf</strong>!</li>
+                    </ul>
+                    </small></div>
+                </section>
+
+                <section data-background="#e6b400">
+                    <h3>editing files with</h3>
+                    <img src="assets/vim.svg" alt="vim" style="height: 500px; margin: 0 auto 4rem auto; background: transparent;">
+                </section>
+
+                <section data-background="#e6b400">
+                    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/-txksrn0qea?controls=0" title="youtube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </section>
+
+                <section data-background="#e6b400">
+                    <h3>vi commands</h3>
+                    <p>from normal mode</p>
+                    <small>
+                    <table>
+                        <tr><td>:w</td><td>write to disk</td></tr>
+                        <tr><td>:q</td><td>quit</td></tr>
+                        <tr><td>:wq</td><td>write and quit</td></tr>
+                        <tr><td>[i]</td><td>insert mode</td></tr>
+                        <tr><td>[u]</td><td>undo</td></tr>
+                        <tr><td>[esc]</td><td>back to normal mode</td></tr>
+                        <tr><td>[/]</td><td>search</td></tr>
+                        <tr><td>:set number</td><td>display line numbers</td></tr>
+                    </table>
+                    </small>
+                </section>
+
+                <section data-background="#e6b400">
+                    <p>exercise</p>
+                    <small>
+                        <ul>
+                            <li>run fixme.py in the ~/exercises/vim/ folder</li>
+                            <li>bugfix it using vim</li>
+                        </ul>
+                    </small>
+                        <pre><code class="bash" data-trim>
+                        $ cd $home/exercises/vim/
+                        
+                        $ ./fixme.py # run the script from the local directory
+
+                        $ vim fixme.py # run vim with the script name as argument
+                        </code></pre>
+                        <div class="fragment">
+                            $$
+                            tan(\pi/2) \neq 16331239353195370 ?
+                            $$
+                        </div>
+                        <div class="fragment">
+                            $$
+                            tan(\pi/2) = \infty !
+                            $$
+                        </div>
+                        <p class="fragment fade-up">bug? enroll in wi4260tu to learn more!</p>
+                </section>
+
+                <section>
+                    <h3>redirecting output</h3>
+                    <small><table>
+                        <tr><td>${command} > ${filename}</td><td>redirect output to a new file</td></tr>
+                        <tr class="fragment"><td>${command} >> ${filename}</td><td>append output to a file</td></tr>
+                        <tr class="fragment"><td>${command} | ${command b}</td><td>use output as input for command b</td></tr>
+                    </table></small>
+                    <div class="fragment">
+                        <p>exercise:</p>
+                        <small>
+                        <ul>
+                            <li>use <strong>/sbin/ldconfig</strong> to <strong>print</strong> a list of all available libraries on the system</li> 
+                            <li>then, <strong>pipe</strong> that list to <strong>grep</strong> to see where the <strong>fftw</strong> library is installed (mind the case).</li>
+                            <li>use <strong>--help</strong> or <strong>man</strong> to find the correct options and syntax</li>
+                        </ul>
+                        </small>
+                    </div>
+                </section>
+
+                <section>
+                    <div>
+                        <pre><code class="bash" data-trim>
+                        $ /sbin/ldconfig --print-cache | grep --ignore-case "fftw"
+                        </code></pre>
+                    </div> 
+                    <div class="fragment">
+                        <p>or:</p>
+                        <pre><code class="bash" data-trim>
+                        $ /sbin/ldconfig -p | grep -i fftw
+                        </code></pre>
+                    </div> 
+                    <small class="fragment"><p>if you cannot find a needed library this way it needs to be installed. if you have administrative access to the machine you can opt to install the package through the linux package manager.</p>
+                        <p>some argue you are much better off keeping all your libraries separated from the operating system, in either a container or your homedirectory.</p>
+                        <p>on shared environments like a supercomputer, you will more than likely not even have other options if the library or software is not available on the system.</p>
+                    </small>
+                </section>
+
+                <section>
+                    <h3>installing packages in your home directory</h3>
+                    <small><p>for simplicity, we will use a language specific package manager many of you will be somewhat familiar with. python's pip will notice you are not a sysadmin and will default to installing to the <strong>.local</strong> folder in your $home.</p>
+                        <p>install the ase package, we will need that in the next slide</p></small>
+                    <pre><code class="bash" data-trim>
+                    $ pip install ase
+                    </code></pre>
+                    <div class="fragment">
+                        <p>exercise:</p>
+                        <small>
+                            <ul>
+                                <li>try to find the newly installed libraries in ~/.local</li> 
+                            </ul>
+                        </small>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>permissions</h3>
+                    <p>file permissions allow you to control who has what kind of access to your files. to control them you have to set <strong>mode bits</strong>.</p>
+                    <small><p>in a nutshell, there are three levels of ownership:</p>
+                        <ul>
+                            <li><strong>u</strong>ser</li>
+                            <li><strong>g</strong>roup</li>
+                            <li><strong>o</strong>ther</li>
+                            <li class="fragment"><strong>a</strong>ll</li>
+                        </ul>
+                        <div class="fragment">
+                        <p>remember u,g,o and a.
+                        there are also three types of permissions:</p>
+                        <ul>
+                            <li><strong>r</strong>ead</li>
+                            <li><strong>w</strong>rite</li>
+                            <li>e<strong>x</strong>ecute</li>
+                        </ul>
+                        <p>remember r,w and x</p>
+
+
+                        </div></small>
+            </section>
+
+            <section>
+                <h3>set the mode bits</h3>
+                <small><p>remember u,g,o (and a) and r,w,x. the command to change these is called <strong>change mode</strong>.</p></small>
+                <div class="fragment">
+                    <pre data-id="code-animation"><code class="bash" data-noescape data-trim data-line-numbers="1|2|3|4">
+                    $ chmod
+                    $ chmod u+x ${filename} 
+                    $ chmod go-wx ${filename}
+                    $ chmod a+rwx ${filename} # probably not a good idea
+                    </code></pre>
+                </div>
+                <div class="fragment">
+                    <p>Exercise:</p>
+                    <small>
+                        <ul>
+                            <li>Go to ~/Exercises/permissions/</li>
+                            <li>Try to make gen_mol_folders.py executable and run it directly using ./gen_mol_folders.py</li>
+                        </ul>
+                    </small>
+                </div>
+            </section>
+
+            <section data-background="#06495e">
+                <h3>remote access with</h3>
+                <img src="assets/ssh.png" alt="ssh" style="height: 256px; margin: 0 auto 4rem auto; background: transparent;">
+            </section>
+
+            <section data-background="#06495e">
+                <p>try to log in to delftblue using your netid:</p>
+                <pre><code class="bash" data-trim>
+                $ ssh -l ${netid} login.delftblue.tudelft.nl
+                </code></pre>
+                <div class="fragment">
+                    <small><p>there is a shorthand, but this is still a lot to type everytime you log in:</p></small>
+                    <pre><code class="bash" data-trim>
+                    $ ssh ${netid}@login.delftblue.tudelft.nl
+                    </code></pre>
+                </div>
+                <p class="fragment">configure the client to make this a lot more user friendly.</p>
+            </section>
+
+            <section data-background="#06495e" data-auto-animate>
+                <p>use <strong>vim</strong> to create ~/.ssh/config:</p>
+                <pre><code class="bash" data-trim>
+                $ mkdir ~/.ssh
+                $ vim ~/.ssh/config
+                </code></pre> 
+                <small><p data-id="code-title">then add:</p></small>
+                <pre data-id="code-animation"><code class="nestedtext" data-noescape data-trim data-line-numbers>
+                host delftblue
+                    user netid
+                    hostname login.delftblue.tudelft.nl
+                </code></pre>
+                <div class="fragment">
+                    <small><p>now try:</p></small>
+                    <pre><code class="bash" data-trim>
+                    $ ssh delftblue
+                    </code></pre> 
+                    <small><p>this works for all programs that use ssh, not just command line</p></small>
+            </section>
+ 
+            <section data-background="#2f4f4f" data-auto-animate>
+                <small><p data-id="code-title">little trick to skip eduvpn when at home, shhh...</p></small>
+                <pre data-id="code-animation"><code class="nestedtext" data-noescape data-trim data-line-numbers=|1-3,8>
+                host bastion
+                    user netid
+                    hostname linux-bastion-ex.tudelft.nl
+
+                host delftblue
+                    user netid
+                    hostname login.delftblue.tudelft.nl
+                    proxyjump bastion
+                </code></pre>
+            </section>
+
+            <section data-background="#06495e">
+                <h3>Life gets better with ssh keys</h3>
+                <div class="fragment">
+                <pre><code class="bash" data-trim>
+                # passphrase recommended, but skip for course 
+                $ ssh-keygen -t ed25519
+
+                # install public key (or lock) on server
+                $ ssh-copy-id -i .ssh/id_ed25519.pub delftblue
+                # at home: $ ssh-copy-id -i .ssh/id_ed25519.pub bastion
+                </code></pre>
+                </div>
+                <div class="fragment">
+                    <small><p>Now:</p></small>
+                    <pre><code class="Bash" data-trim>
+                    $ ssh delftblue
+                    </code></pre>
+                </div>
+                <p class="fragment"><small>These often also work for other applications</small></p>
+            </section>
+
+            <section data-background="#06495e">
+                <h3>Transfer files with rsync</h3>
+                <p>Rsync is the smartest file transfer program around.</p>
+                <small><p>Almost all cloud services use its algorithm to save bandwidth</p></small>
+                <div class="fragment">
+                <small><p>For now, just copy the science folder to DelftBlue. The syntax is similar to copy, but can also target remote systems</p></small>
+                <pre><code class="bash" data-trim>
+                $ rsync -avx ~/Documents/science delftblue:~/
+                </code></pre>
+                </div>
+                <div class="fragment">
+                    <small><p>Now run the same command again. Can you tell why rsync is so smart?</p></small>
+                </div>
+            </section>
+
+            <section>
+                <h3>BASH scripting</h3>
+                <p><small>Scripting is nothing more than slapping a few commands on top of each other in a file. BASH then executes the commands line by line.</small></p>
+                <div class="fragment">
+                    <p>Exercise:</p>
+                    <small>
+                        <ul>
+                            <li>Go to ~/Exercises/scripting/</li>
+                            <li>Try to run example_script.sh a few times, then check it out in vim</li>
+                            <li>Can you figure out each part of the script</li>
+                        </ul>
+                    </small>
+                </div> 
+
+            </section>
+
+            <section>
+                <p>example-script.sh</p>
+                <pre data-id="code-animation"><code class="Bash" data-trim data-line-numbers="1|3-7|9-10|14-21|25|29|35">
+                #!/usr/bin/env bash
+
+                if [ $# != 2 ] 
+                then
+                    echo "Usage: example_script.sh Firstname Lastname"
+                    exit
+                fi
+
+                firstname=$1
+                lastname=$2
+
+                echo "Hello ${firstname} ${lastname}!" 
+
+                while true; do
+                    read -p "Do you like this course? (y/n):" yn
+                    case ${yn} in
+                        [Yy*]* ) break;;
+                        [Nn]* ) echo "wrong answer";;
+                        * ) echo "Please answer y or n"
+                    esac
+                done
+
+                echo "Thanks! That is awesome!"
+                echo "Do you know that your last name, ${lastname}"
+                echo "has ${#lastname} characters?"
+
+                mkdir --parent ${firstname}
+
+                echo $lastname >> ${firstname}/lastname.txt
+
+                echo "You've succesfullly ran this script"
+                sleep 1
+                echo "Let me count"
+                sleep 1
+                echo "$(cat $firstname/lastname.txt | wc -l) time(s)"
+                </code></pre>
+            </section>
+
+            <section>
+                <h3>Now it is your turn to create a script</h3>
+                <small><p>Edit the exercise script, so that it produces a new script that already has some boilerplate</p></small>
+            </section>
+
+            <section>
+                <h3>Solution</h3>
+                <pre data-id="code-animation"><code class="Bash" data-trim data-line-numbers="|1|4|7-11|14|17|20">
+                    #!/usr/bin/env bash
+
+                    # Assigns the first argument to the variable script_name
+                    script_name=$1
+
+                    # Checks if script_name is set, if not prompt for name
+                    if [ -z "${script_name}" ]
+                    then
+                      echo "Please enter a name for your script: "
+                      read script_name
+                    fi
+
+                    # Kick the script off with a shebang
+                    echo "#!/usr/bin/env bash" > ${script_name}
+
+                    # Set the permissions
+                    chmod u+x ${script_name}
+
+                    # Run vim
+                    vim ${script_name}
+
+                </code></pre>
+            </section>
+
+            <section>
+                <h3>DelftBlue, follow along</h3>
+            </section>
+
+               
+           
+        </div>
+
+        <script src="dist/reveal.js"></script>
+        <script src="plugin/notes/notes.js"></script>
+        <script src="plugin/markdown/markdown.js"></script>
+        <script src="plugin/highlight/highlight.js"></script>
+        <script src="plugin/math/math.js"></script>
+        <script>
+            // More info about initialization & config:
+            // - https://revealjs.com/initialization/
+            // - https://revealjs.com/config/
+            Reveal.initialize({
+                hash: true,
+                center: true,
+                katex: {
+                    version: 'latest',
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '\\[', right: '\\]', display: true}
+                    ],
+                    ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+                },
+
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ]
+            });
+            Reveal.configure({ pdfSeparateFragments: false });
+        </script>
+    </body>
+</html>
